@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<group android:id="@+id/menu_grp_rental" android:menuCategory="alternative" >
+    <item android:id="@+id/find_rent" android:title="View Properties" android:icon="@drawable/ic_baseline_apartment_24"/>
+    <item android:id="@+id/my_rent" android:title="My Rent" android:icon="@drawable/ic_baseline_home_work_24"/>
+</group>
+<group android:menuCategory="secondary" android:id="@+id/menu_grp_rentee" android:visible="false">
+    <item android:id="@+id/add_property" android:title="Add Property" android:icon="@drawable/ic_baseline_add_business_24"/>
+    <item android:id="@+id/view_property" android:title="View your Properties" />
+</group>
+<group android:menuCategory="system">
+    <item android:id="@+id/account" android:title="View Account" android:icon="@drawable/ic_baseline_account_circle_24"/>
+    <item android:id="@+id/logout" android:title="Sign out" android:icon="@drawable/ic_baseline_exit_to_app_24"/>
+</group>
+</menu>

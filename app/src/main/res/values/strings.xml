@@ -1,9 +1,41 @@
 <resources>
     <string name="app_name">RentCafe</string>
-    <string name="login">Login</string>
-    <string name="register">Register</string>
-    <string name="cpassword">Confirm Password</string>
-    <string name="mobile">Mobile No</string>
+
+    <string name="login_title">Login</string>
+    <string name="login_btn">Login</string>
+    <string name="register_title">Register with us</string>
+    <string name="registration_btn">Register</string>
+    <string name="firstName">First Name</string>
+    <string name="lastName">Last Name</string>
+    <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="name">Name</string>
+    <string name="contact">Phone No</string>
+
+    <string name="add_property_title">List Your Property</string>
+    <string name="property_name">Property Name</string>
+    <string name="property_type">Property Type</string>
+    <string name="property_type_prompt">Choose</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="zip_code">Zip Code</string>
+    <string name="price">Price (CAD)</string>
+    <string name="bedrooms">No of Bedrooms</string>
+    <string name="bathrooms">No of Bathrooms</string>
+    <string name="utilities">Utilities</string>
+    <string name="hydro">Hydro</string>
+    <string name="none">None</string>
+    <string name="heat">Heat</string>
+    <string name="microwave">Microwave</string>
+    <string name="water">Water</string>
+    <string name="furnished">Furnished</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="parking">Parking</string>
+    <string name="description">Description</string>
+    <string name="list_property_btn">List Property</string>
+    <string name="image_selection">Select an image</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <!-- TODO: Remove or change this placeholder text -->
+
 </resources>

@@ -8,10 +8,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar.RentCafe">
+        android:theme="@style/Theme.RentCafe">
         <activity android:name=".HomeActivity"></activity>
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".RegisterActivity" android:theme="@style/Theme.NoActionBar.RentCafe"/>
+        <activity android:name=".MainActivity" android:theme="@style/Theme.NoActionBar.RentCafe">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

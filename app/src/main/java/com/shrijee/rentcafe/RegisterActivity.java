@@ -13,7 +13,7 @@ import com.shrijee.rentcafe.model.User;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText email,password,name,contact;
+    EditText email,password,firstName,contact,lastName;
     DatabaseHelper databaseHelper;
 
     @Override
@@ -25,10 +25,11 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void setWidgets() {
-        email = findViewById(R.id.login_edt_email);
-        password = findViewById(R.id.login_edt_password);
-        name = findViewById(R.id.register_edt_name);
-        contact = findViewById(R.id.login_edt_mobile);
+        email = findViewById(R.id.city_edittext);
+        password = findViewById(R.id.state_edittext);
+        firstName = findViewById(R.id.rentname_edittext);
+        lastName = findViewById(R.id.lname_edittext);
+        contact = findViewById(R.id.price_edittext);
     }
 
     public void loginBtnClicked(View view) {
@@ -39,8 +40,10 @@ public class RegisterActivity extends AppCompatActivity {
         try {
             String emailText = email.getText().toString().trim();
             String passwordText = password.getText().toString().trim();
-            String nameText = name.getText().toString().trim();
+            String fnameText = firstName.getText().toString().trim();
+            String lnameText = lastName.getText().toString().trim();
             String contactText = contact.getText().toString().trim();
+            String nameText = fnameText + " " + lnameText;
 
             if(emailText.isEmpty() || passwordText.isEmpty() || nameText.isEmpty() || contactText.isEmpty())
             {

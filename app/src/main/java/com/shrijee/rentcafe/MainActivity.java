@@ -34,14 +34,20 @@ public class MainActivity extends AppCompatActivity {
         String savedEmail = sharedPreferences.getString("email","");
         if(!savedEmail.isEmpty())
         {
-            Toast.makeText(getApplicationContext(),"Login success for " + savedEmail , Toast.LENGTH_SHORT).show();
+            moveToHomeActivity();
+            //Toast.makeText(getApplicationContext(),"Login success for " + savedEmail , Toast.LENGTH_SHORT).show();
         }
     }
 
+    private void moveToHomeActivity() {
+        Intent homeactivityIntent = new Intent(this,HomeActivity.class);
+        startActivity(homeactivityIntent);
+    }
+
     private void setWidgets() {
-        loginBtn = findViewById(R.id.login_btn_login);
-        email = findViewById(R.id.login_edt_email);
-        password = findViewById(R.id.login_edt_password);
+        loginBtn = findViewById(R.id.login_btn);
+        email = findViewById(R.id.city_edittext);
+        password = findViewById(R.id.state_edittext);
     }
 
     public void loginBtnClicked(View view) {
@@ -64,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("email",emailText);
                     editor.apply();
+//                    clearDetails();
+                    moveToHomeActivity();
                 }
                 else
                 {
@@ -75,6 +83,11 @@ public class MainActivity extends AppCompatActivity {
         {
             Toast.makeText(getApplicationContext(),"Something went wrong! Please try again later!",Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void clearDetails() {
+        password.setText("");
+        email.setText("");
     }
 
     public void registerBtnClicked(View view) {
