@@ -40,6 +40,14 @@
     <string name="rent_btn">Rent</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="find_properties_on_rent">Find Properties On Rent</string>
+    <string name="my_rent">My Rent</string>
+    <string name="add_property">Add Property</string>
+    <string name="view_my_properties">View My Properties</string>
+    <string name="view_account">View Account</string>
+    <string name="sign_out">Sign out</string>
+    <string name="account">Account Details</string>
+    <string name="are_you_a_rentee">Are you a Rentee?</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 </resources>

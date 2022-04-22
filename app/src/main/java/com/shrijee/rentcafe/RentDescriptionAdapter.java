@@ -17,13 +17,15 @@ import java.util.List;
 public class RentDescriptionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         List<RentedProperty> rentList = null;
+        MyRentClickListner myRentClickListner = null;
 
         public RentDescriptionAdapter()
         {}
 
-        public RentDescriptionAdapter(List<RentedProperty> rentList)
+        public RentDescriptionAdapter(List<RentedProperty> rentList,MyRentClickListner myRentClickListner)
         {
             this.rentList = rentList;
+            this.myRentClickListner = myRentClickListner;
         }
 
         public void setData(List<RentedProperty> rentList)
@@ -32,11 +34,12 @@ public class RentDescriptionAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             notifyDataSetChanged();
         }
 
-        class MyViewHolder extends RecyclerView.ViewHolder
+        class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
         {
 
             TextView priceView,nameView,locationView,typeView;
             ImageView propertyPhoto;
+
             public MyViewHolder(@NonNull View itemView) {
                 super(itemView);
                 priceView = itemView.findViewById(R.id.price);
@@ -44,6 +47,12 @@ public class RentDescriptionAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 locationView = itemView.findViewById(R.id.location);
                 propertyPhoto = itemView.findViewById(R.id.house_image);
                 typeView = itemView.findViewById(R.id.house_type);
+                itemView.setOnClickListener(this);
+            }
+
+            @Override
+            public void onClick(View view) {
+                myRentClickListner.onMyRentClickListner(getAdapterPosition());
             }
         }
         @NonNull
@@ -66,6 +75,11 @@ public class RentDescriptionAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         @Override
         public int getItemCount() {
             return rentList.size();
+        }
+
+        public interface MyRentClickListner
+        {
+            public void onMyRentClickListner(int position);
         }
 
 }

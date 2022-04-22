@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -22,6 +23,7 @@ public class AccountFragment extends Fragment {
     Switch mSwitch;
     SharedPreferences sharedPreferences;
     String userName;
+    TextView nameTextView;
 
     public AccountFragment() {
 
@@ -45,7 +47,8 @@ public class AccountFragment extends Fragment {
 
     private void setWidgets(View view) {
         mSwitch = view.findViewById(R.id.switch_enable_adding);
-
+        nameTextView = view.findViewById(R.id.account_name_txt);
+        nameTextView.setText(userName);
         mSwitch.setChecked(sharedPreferences.getBoolean("EnableAddingRentProperty"+"_"+userName,false));
         NavigationView nav = getActivity().findViewById(R.id.nav_layout);
         Menu menu = nav.getMenu();

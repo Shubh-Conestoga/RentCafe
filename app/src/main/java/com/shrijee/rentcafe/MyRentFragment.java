@@ -11,8 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.shrijee.rentcafe.database.DatabaseHelper;
+import com.shrijee.rentcafe.dialog.RentDeleteDialog;
 import com.shrijee.rentcafe.model.RentedProperty;
 
 import java.util.List;
@@ -49,8 +51,15 @@ public class MyRentFragment extends Fragment {
         int userId = email.isEmpty() ? -1 : databaseHelper.getRenterIdByEmail(email);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        List<RentedProperty> rentedDetails = databaseHelper.getRentedPropertyDetails("RENTER_ID",userId);
-        RentDescriptionAdapter rentDescriptionAdapter = new RentDescriptionAdapter(rentedDetails);
+        List<RentedProperty> rentedDetails = databaseHelper.getRentedPropertyDetails("RENTEE_ID",userId);
+        RentDescriptionAdapter rentDescriptionAdapter = new RentDescriptionAdapter(rentedDetails, new RentDescriptionAdapter.MyRentClickListner() {
+            @Override
+            public void onMyRentClickListner(int position) {
+                Toast.makeText(getContext(),"Clicked",Toast.LENGTH_SHORT).show();
+                RentDeleteDialog rentDeleteDialog = new RentDeleteDialog(rentedDetails,position);
+                rentDeleteDialog.show(getParentFragmentManager(),"Delete Fragment");
+            }
+        });
         mRecyclerView.setAdapter(rentDescriptionAdapter);
 
     }

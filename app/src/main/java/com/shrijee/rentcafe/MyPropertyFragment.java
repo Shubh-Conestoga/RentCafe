@@ -63,6 +63,12 @@ public class MyPropertyFragment extends Fragment {
             public void onRentClick(View view, int position) {
             }
         });
+
         mRecyclerView.setAdapter(rentAdapter);
+    }
+
+    public void kissMe()
+    {
+
     }
 }

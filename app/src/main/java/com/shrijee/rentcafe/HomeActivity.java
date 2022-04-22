@@ -59,7 +59,7 @@ public class HomeActivity extends AppCompatActivity {
                         fragment = new MyPropertyFragment();
                         break;
                     case R.id.logout:
-                        sharedPreferences.edit().clear().commit();
+                        sharedPreferences.edit().putString("email","").commit();
                         onBackPressed();
                         break;
                     case R.id.account:

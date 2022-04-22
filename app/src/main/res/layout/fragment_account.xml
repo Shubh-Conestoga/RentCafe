@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".AccountFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,13 +14,23 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Account" />
+            android:text="@string/account" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:layout_marginTop="20sp"
+            android:textStyle="bold"
+            android:id="@+id/account_name_txt"
+            android:text="@string/account" />
 
         <Switch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Enable Adding"
+            android:text="@string/are_you_a_rentee"
             android:layout_marginTop="10dp"
+            android:textSize="16sp"
             android:id="@+id/switch_enable_adding"
             />
     </LinearLayout>
