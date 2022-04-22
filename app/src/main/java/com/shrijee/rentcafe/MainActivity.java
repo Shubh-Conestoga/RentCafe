@@ -56,12 +56,16 @@ public class MainActivity extends AppCompatActivity {
         databaseHelper = new DatabaseHelper(getApplicationContext());
         sharedPreferences = getSharedPreferences(sharedPrefrence,MODE_PRIVATE);
         setContentView(R.layout.activity_main);
+//        setting the widgets
         setWidgets();
+//        checking the login
         checkLogin();
     }
 
     private void checkLogin() {
+        //gettingthe email
         String savedEmail = sharedPreferences.getString("email","");
+//        ..if user email key present in sharefPref then skip the login and go to home screen
         if(!savedEmail.isEmpty())
         {
             moveToHomeActivity();
@@ -83,9 +87,11 @@ public class MainActivity extends AppCompatActivity {
     public void loginBtnClicked(View view) {
         try
         {
+            //getting the email and password
             String emailText = emailEle.getText().toString().trim();
             String passwordText = passwordEle.getText().toString().trim();
 
+            //validation
             if(!validation.stringValidation(emailText) || !validation.stringValidation(passwordText))
             {
                 Toast.makeText(getApplicationContext(),"Please fill the email and password",Toast.LENGTH_LONG).show();
@@ -96,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 User user = databaseHelper.loginCheck(emailText,passwordText);
                 if(user!=null)
                 {
+                    //adding the username in sharedpref
                     Toast.makeText(getApplicationContext(),"Login success",Toast.LENGTH_SHORT).show();
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("email",emailText);
@@ -104,11 +111,13 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
+                    //toasting the wrong cred msg and clearing the fields
                     Toast.makeText(getApplicationContext(),"Wrong credentials",Toast.LENGTH_SHORT).show();
                     clearDetails();
                 }
             }
         }
+        //catching the exeption and toasing an error
         catch (Exception e)
         {
             Toast.makeText(getApplicationContext(),"Something went wrong! Please try again later!",Toast.LENGTH_LONG).show();
@@ -120,6 +129,9 @@ public class MainActivity extends AppCompatActivity {
         emailEle.setText("");
     }
 
+
+
+// if register btn click then take user to register screen
     public void registerBtnClicked(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
