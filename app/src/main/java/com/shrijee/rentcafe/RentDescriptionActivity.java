@@ -2,10 +2,13 @@ package com.shrijee.rentcafe;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +28,8 @@ public class RentDescriptionActivity extends AppCompatActivity {
     DatabaseHelper databaseHelper;
     ImageView propertyImage;
     TextView nameEle, addressEle, priceEle,bedroomEle,bathroomEle,descriptionEle,zipcodeEle,stateEle,cityEle,typeEle,waterEle,microwaveEle,heatEle,hydroEle,furnishedEle,parkingEle;
+    ImageButton callBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +41,25 @@ public class RentDescriptionActivity extends AppCompatActivity {
         rent = (Rent)getIntent().getSerializableExtra("RENT_DATA");
         setWidgets();
         setData();
+        setClickListners();
+    }
+
+    private void setClickListners() {
+        callBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String phoneNo = new DatabaseHelper(getApplicationContext()).getPhoneNoById(rent.getRenter());
+                if(!phoneNo.isEmpty())
+                {
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel","+1"+String.valueOf(phoneNo),null));
+                    startActivity(intent);
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),"No Phone Number Available!",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void setData() {
@@ -84,7 +108,7 @@ public class RentDescriptionActivity extends AppCompatActivity {
         parkingEle = findViewById(R.id.parking);
         furnishedEle = findViewById(R.id.furnished);
         descriptionEle = findViewById(R.id.property_description);
-
+        callBtn = findViewById(R.id.desc_call_btn);
     }
 
     public void backButtonClicked(View view) {

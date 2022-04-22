@@ -458,4 +458,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return false;
     }
+
+    public String getPhoneNoById(int renter) {
+        String sql = "SELECT " + USER_COL5 + " FROM " + USER_TABLE + " WHERE " + USER_COL1 + " = ?;";
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        try
+        {
+            Cursor cursor = sqLiteDatabase.rawQuery(sql,new String[]{String.valueOf(renter)});
+            while(cursor.moveToNext())
+            {
+                return cursor.getString(0);
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return "";
+    }
 }
