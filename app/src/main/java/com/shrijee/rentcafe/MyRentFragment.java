@@ -63,7 +63,6 @@ public class MyRentFragment extends Fragment {
         rentDescriptionAdapter = new RentDescriptionAdapter(rentedPropertyList, new RentDescriptionAdapter.MyRentClickListner() {
             @Override
             public void onMyRentClickListner(int position) {
-                Toast.makeText(getContext(),"Clicked",Toast.LENGTH_SHORT).show();
                 RentDeleteDialog rentDeleteDialog = new RentDeleteDialog(rentedPropertyList,position);
                 rentDeleteDialog.show(getParentFragmentManager(),"Delete Fragment");
             }

@@ -89,6 +89,27 @@ public class RentDescriptionActivity extends AppCompatActivity {
         }
 
         descriptionEle.setText(rent.getDescription());
+
+        if(rent.getImageURL().equals("1"))
+            propertyImage.setImageDrawable(MainActivity.PHOTO_1);
+        else if(rent.getImageURL().equals("2"))
+            propertyImage.setImageDrawable(MainActivity.PHOTO_2);
+        else if(rent.getImageURL().equals("3"))
+            propertyImage.setImageDrawable(MainActivity.PHOTO_3);
+        else if(rent.getImageURL().equals("4"))
+            propertyImage.setImageDrawable(MainActivity.PHOTO_4);
+        else if(rent.getImageURL().equals("5"))
+            propertyImage.setImageDrawable(MainActivity.PHOTO_5);
+        else if(rent.getImageURL().equals("6"))
+            propertyImage.setImageDrawable(MainActivity.PHOTO_6);
+        else if(rent.getImageURL().equals("7"))
+            propertyImage.setImageDrawable(MainActivity.PHOTO_7);
+        else if(rent.getImageURL().equals("8"))
+            propertyImage.setImageDrawable(MainActivity.PHOTO_8);
+        else if(rent.getImageURL().equals("9"))
+            propertyImage.setImageDrawable(MainActivity.PHOTO_9);
+        else
+            propertyImage.setImageDrawable(MainActivity.PHOTO_10);
     }
 
     private void setWidgets() {

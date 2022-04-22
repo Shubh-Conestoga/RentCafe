@@ -24,6 +24,8 @@ import com.shrijee.rentcafe.model.Rent;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
+
 import com.shrijee.rentcafe.miscellaneous.Validation;
 
 
@@ -48,6 +50,8 @@ public class AddRentFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         databaseHelper = new DatabaseHelper(getContext());
         super.onCreate(savedInstanceState);
+        Toast.makeText(getContext(),String.valueOf(new Random().nextInt(10)+1),Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
@@ -59,6 +63,7 @@ public class AddRentFragment extends Fragment {
     }
 
     private void setWidgets(View view) {
+
         nameEle = view.findViewById(R.id.name_edittext);
         priceEle = view.findViewById(R.id.price_edittext);
         bedroomEle = view.findViewById(R.id.bedroom_edittext);
@@ -154,7 +159,8 @@ public class AddRentFragment extends Fragment {
                 }
                 else
                 {
-                    Rent rent = new Rent(rentName,rentAddress,rentPincode,rentCity,rentState,userId,Float.parseFloat(rentPrice),rentPropertyType,rentDescription,"",Integer.parseInt(rentBedroom), Integer.parseInt(rentBathroom),rentUtilitiesList,rentFurnished,rentParking);
+                    String rentImg = String.valueOf(new Random().nextInt(10));
+                    Rent rent = new Rent(rentName,rentAddress,rentPincode,rentCity,rentState,userId,Float.parseFloat(rentPrice),rentPropertyType,rentDescription,rentImg,Integer.parseInt(rentBedroom), Integer.parseInt(rentBathroom),rentUtilitiesList,rentFurnished,rentParking);
                     boolean isAdded = databaseHelper.save(rent);
                     if(isAdded)
                     {

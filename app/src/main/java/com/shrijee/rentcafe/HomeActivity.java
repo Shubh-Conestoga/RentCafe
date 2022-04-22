@@ -7,6 +7,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -60,7 +61,8 @@ public class HomeActivity extends AppCompatActivity {
                         break;
                     case R.id.logout:
                         sharedPreferences.edit().putString("email","").commit();
-                        onBackPressed();
+                        Intent mainActivity = new Intent(getApplicationContext(),MainActivity.class);
+                        startActivity(mainActivity);
                         break;
                     case R.id.account:
                         fragment = new AccountFragment();
