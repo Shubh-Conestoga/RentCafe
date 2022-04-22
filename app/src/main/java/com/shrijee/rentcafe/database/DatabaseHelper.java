@@ -19,16 +19,19 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+// Database Helper for SQLite Database
 public class DatabaseHelper extends SQLiteOpenHelper {
 
+    // Field name constants
     private static String DB_NAME = "RentDB";
-
     private static String USER_TABLE = "USER";
     private static String USER_COL1 = "USER_ID";
     private static String USER_COL2 = "USER_NAME";
     private static String USER_COL3 = "USER_EMAIL";
     private static String USER_COL4 = "USER_PASSWORD";
     private static String USER_COL5 = "USER_CONTACT";
+    
+    // create table statement
     private static String CREATE_USER =  "CREATE TABLE " + USER_TABLE + " ("
             + USER_COL1 + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
             + USER_COL2 + " VARCHAR(30) NOT NULL, "
@@ -36,6 +39,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + USER_COL4 + " VARCHAR(50) NOT NULL, "
             + USER_COL5 + " INTEGER(20) NOT NULL "
             + ");";
+    
+    // Drop table statement
     private static String DROP_USER = "DROP TABLE "+USER_TABLE+";";
 
     private static String PROPERTY_TABLE = "PROPERTY";
@@ -56,7 +61,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static String PROPERTY_COL15 = "PROPERTY_IMAGE_URL";
     private static String PROPERTY_COL16 = "PROPERTY_ADDRESS";
 
-
+    // create table statement
     private static String CREATE_PROPERTY =  "CREATE TABLE " + PROPERTY_TABLE + " ("
             + PROPERTY_COL1 + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
             + PROPERTY_COL2 + " INTEGER NOT NULL, "
@@ -74,6 +79,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + PROPERTY_COL14 + " INTEGER(1) DEFAULT 0, "
             + PROPERTY_COL15 + " TEXT "
             + " );";
+    
+    // Drop table statement
     private static String DROP_PROPERTY = "DROP TABLE "+PROPERTY_TABLE+";";
 
 
