@@ -17,6 +17,7 @@ import com.shrijee.rentcafe.miscellaneous.Validation;
 
 public class MainActivity extends AppCompatActivity {
 
+    //widgets and data
     Button loginBtnEle, registerBtnEle;
     EditText emailEle,passwordEle;
     DatabaseHelper databaseHelper;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+       //setting the variable so that it can easily be used anywhere in the project
         PHOTO_1 = getDrawable(R.drawable.photo_1);
         PHOTO_2 = getDrawable(R.drawable.photo_2);
         PHOTO_3 = getDrawable(R.drawable.photo_3);
@@ -49,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         PHOTO_8 = getDrawable(R.drawable.photo_8);
         PHOTO_9 = getDrawable(R.drawable.photo_9);
         PHOTO_10 = getDrawable(R.drawable.photo_10);
+
+        //creating an object of DatabaseHelper and getting the sharedPred
         databaseHelper = new DatabaseHelper(getApplicationContext());
         sharedPreferences = getSharedPreferences(sharedPrefrence,MODE_PRIVATE);
         setContentView(R.layout.activity_main);

@@ -32,14 +32,16 @@ import com.shrijee.rentcafe.miscellaneous.Validation;
 
 public class AddRentFragment extends Fragment {
 
-
+    //Widgets
     EditText nameEle, addressEle, priceEle,bedroomEle,bathroomEle,descriptionEle,zipcodeEle,stateEle,cityEle;
     CheckBox noneEle, hydroEle,waterEle,heatEle,microwaveEle;
     RadioGroup furnishedEle,parkingEle;
     Spinner propertyTypeEle;
     Button listPropertyBtnEle;
     DatabaseHelper databaseHelper;
+    //Option for spinner
     String[] propertyTypes = {"Apartment","House","Condo","Shop","Parking"};
+    //for validation
     Validation validation = new Validation();
 
     public AddRentFragment() {
@@ -55,7 +57,9 @@ public class AddRentFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //infating the view
         View view = inflater.inflate(R.layout.fragment_add_rent, container, false);
+        //setting the widgets
         setWidgets(view);
         return view;
     }
@@ -73,8 +77,10 @@ public class AddRentFragment extends Fragment {
         addressEle = view.findViewById(R.id.addrent_address_edittext);
 
         propertyTypeEle = view.findViewById(R.id.type_spinner);
+        //setting the arrayadapter to Spinner
         ArrayAdapter<String> propertyTypeAdapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,propertyTypes);
         propertyTypeEle.setAdapter(propertyTypeAdapter);
+        //making first item default
         propertyTypeEle.setSelection(0);
 
         listPropertyBtnEle = view.findViewById(R.id.list_property_btn);
@@ -87,10 +93,13 @@ public class AddRentFragment extends Fragment {
         heatEle = view.findViewById(R.id.utilities_heat_chkbox);
         microwaveEle = view.findViewById(R.id.utilities_microwave_chkbox);
 
+//        /
         listPropertyBtnEle.setOnClickListener(new View.OnClickListener() {
             @Override
+            //called when list property button gets clicked
             public void onClick(View view) {
                 boolean isValidated = true;
+                //getting the values from the form
                 String rentName = nameEle.getText().toString().trim();
                 String rentPrice = priceEle.getText().toString().trim();
                 String rentBedroom = bedroomEle.getText().toString().trim();
@@ -106,22 +115,26 @@ public class AddRentFragment extends Fragment {
 
                 SQLiteDatabase database = databaseHelper.getReadableDatabase();
                 String email = getContext().getSharedPreferences(MainActivity.sharedPrefrence, Context.MODE_PRIVATE).getString("email","");
+                //getting the userId by email with help of DatabaseHelper class's function
                 int userId = email.trim().isEmpty() ? -1 : databaseHelper.getRenterIdByEmail(email.trim());
-
+                //if hydro selected then it will be appended in Comma separated String utilities otherwise empty string appended
                 String hydroUtilities = hydroEle.isChecked() ? "Hydro," : "";
                 String heatUtilities = heatEle.isChecked() ? "Heat," : "";
                 String waterUtilities = waterEle.isChecked() ? "Water," : "";
                 String microwaveUtilities = microwaveEle.isChecked() ? "Microwave," : "";
                 String rentUtilities = hydroUtilities + heatUtilities + waterUtilities + microwaveUtilities;
+                //removing the last character
                 if(!rentUtilities.isEmpty())
                     rentUtilities = rentUtilities.substring(0,rentUtilities.length()-1);
 
+                //making a list of utilities by spliting it on comma
                 List<String> rentUtilitiesList = Arrays.asList(rentUtilities.split(","));
 
+                //getting the data for furnished and parking. if checked then value will be 1 or 0
                 int rentFurnished = furnishedEle.getCheckedRadioButtonId()==R.id.furnished_yes_radioGrp ? 1 : 0;
                 int rentParking = parkingEle.getCheckedRadioButtonId()==R.id.parking_yes_radioGrp ? 1 : 0;
 
-
+                //if any validation error then it will be appended in this errorMsg
                 String errorMsg = "";
                 if(!validation.stringValidation(rentName))
                 {
@@ -151,30 +164,38 @@ public class AddRentFragment extends Fragment {
                 {
                     errorMsg += "Please Choose Type of property!\n";
                 }
+                //if validation error then showing the error
                 if(!errorMsg.isEmpty())
                 {
                     Toast.makeText(getContext(),errorMsg,Toast.LENGTH_LONG).show();
                 }
                 else
                 {
+                    //otherwise
+                    //getting a random id for getting any image for the property to be added in DB and it is bounded to  10 because we need in between 0 to 9
                     String rentImg = String.valueOf(new Random().nextInt(10));
+                    //creating a Rent object
                     Rent rent = new Rent(rentName,rentAddress,rentPincode,rentCity,rentState,userId,Float.parseFloat(rentPrice),rentPropertyType,rentDescription,rentImg,Integer.parseInt(rentBedroom), Integer.parseInt(rentBathroom),rentUtilitiesList,rentFurnished,rentParking);
+                    //saving data to DB using DatabseHelper Class's method save
                     boolean isAdded = databaseHelper.save(rent);
+                    //if added
                     if(isAdded)
                     {
+                        //showing the success toast and taking user to HomeActivity
                         Toast.makeText(getContext(),"Rent details saved!!",Toast.LENGTH_SHORT).show();
                         Intent homeactivityIntent = new Intent(getContext(), HomeActivity.class);
                         startActivity(homeactivityIntent);
                     }
                     else
                     {
+                        //showing an Error
                         Toast.makeText(getContext(),"Something went wrong!!",Toast.LENGTH_SHORT).show();
                     }
                 }
             }
         });
     }
-
+//for moving user to HomeActivity
     private void moveToHomeActivity() {
         Intent homeactivityIntent = new Intent(getContext(), HomeActivity.class);
         startActivity(homeactivityIntent);
