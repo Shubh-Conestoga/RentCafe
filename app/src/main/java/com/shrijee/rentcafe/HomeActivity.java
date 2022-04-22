@@ -16,6 +16,7 @@ import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivity extends AppCompatActivity {
 
+    //widget
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle toggle;
     NavigationView mNavigationView;
@@ -26,15 +27,20 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        //getting the sharedPref
         sharedPreferences = getSharedPreferences(MainActivity.sharedPrefrence,MODE_PRIVATE);
         mDrawerLayout = findViewById(R.id.drawer_layout);
         mNavigationView = findViewById(R.id.nav_layout);
 
+        //getting the userName and based on that getting if he is a renter or not
         String userName = sharedPreferences.getString("email","");
+
         Boolean enableRentee = sharedPreferences.getBoolean("EnableAddingRentProperty_"+userName,false);
+//        and based on that showing the menu group for adding property other wise not
         mNavigationView.getMenu().setGroupVisible(R.id.menu_grp_rentee,enableRentee);
 
         setInitialFragment();
+        //synchronizing the toggle menu
         toggle = new ActionBarDrawerToggle(this,mDrawerLayout,R.string.open,R.string.close);
         mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
@@ -45,6 +51,7 @@ public class HomeActivity extends AppCompatActivity {
             Fragment fragment = null;
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                //if defferent menu option gets seleted then based on that fragment is initialized to according value
                 switch (item.getItemId())
                 {
                     case R.id.find_rent:
@@ -60,6 +67,7 @@ public class HomeActivity extends AppCompatActivity {
                         fragment = new MyPropertyFragment();
                         break;
                     case R.id.logout:
+                        //if logout is pressed then removing the email from shared pref and taking user to login screen
                         sharedPreferences.edit().putString("email","").commit();
                         Intent mainActivity = new Intent(getApplicationContext(),MainActivity.class);
                         startActivity(mainActivity);
@@ -72,9 +80,13 @@ public class HomeActivity extends AppCompatActivity {
                 }
                 if(fragment!=null)
                 {
+                    //initialize the transaction
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    //replacing the frame layout to seleted option fragment's layout
                     fragmentTransaction.replace(R.id.frm_frame_layout,fragment);
+                    //committing the
                     fragmentTransaction.commit();
+                    //closing the drawer
                     mDrawerLayout.closeDrawers();
                     return true;
                 }
@@ -83,6 +95,7 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    //initially starting the RentalFragment fragment
     private void setInitialFragment() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frm_frame_layout,new RentalFragment());
