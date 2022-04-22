@@ -229,10 +229,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 +",p."+PROPERTY_COL13
                 +",p."+PROPERTY_COL14
                 +",p."+PROPERTY_COL15;
-        String query = "SELECT "+ columnList + " FROM " + PROPERTY_TABLE + " p LEFT JOIN " + RENTED_PROPERTY_TABLE + " r ON r.PROPERTY_ID = p.PROPERTY_ID WHERE  ACTIVE_FLAG IS  NULL OR ACTIVE_FLAG = ?;" ;
+        String query = "SELECT "+ columnList + " FROM " + PROPERTY_TABLE + " p WHERE p." + PROPERTY_COL1 + " NOT IN(SELECT "+RENTED_PROPERTY_COL2+" FROM "+ RENTED_PROPERTY_TABLE+ " WHERE ACTIVE_FLAG = ?);" ;
        try{
            SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-           Cursor cursor = sqLiteDatabase.rawQuery(query,new String[]{String.valueOf(0)});
+           Cursor cursor = sqLiteDatabase.rawQuery(query,new String[]{String.valueOf(1)});
            while (cursor.moveToNext())
            {
                rent = new Rent();
@@ -297,7 +297,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String query = "SELECT "+ columns +" FROM " + RENTED_PROPERTY_TABLE + " r, " + PROPERTY_TABLE + " p";
         if(!searchColumn.isEmpty())
         {
-                query+=" WHERE " + "p.PROPERTY_ID = r.PROPERTY_ID AND " + searchColumn.trim().toUpperCase() + " = ? ;";
+                query+=" WHERE " + "p.PROPERTY_ID = r.PROPERTY_ID AND " + searchColumn.trim().toUpperCase() + " = ? AND ACTIVE_FLAG = 1;";
         }
         else
         {
@@ -391,11 +391,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return -1;
     }
 
-    public List<Rent> getRenteePropertyDetails(int userId) {
-        List<Rent> rentList = new ArrayList<>();
+    public List<RentedProperty> getRenteePropertyDetails(int userId) {
+        List<RentedProperty> rentList = new ArrayList<>();
         Rent rent = null;
-        String columnList = "p."+PROPERTY_COL1
-                +",p."+PROPERTY_COL2
+        RentedProperty rentedProperty = null;
+        String columnList = "DISTINCT(p."+PROPERTY_COL1
+                +"),p."+PROPERTY_COL2
                 +",p."+PROPERTY_COL3
                 +",p."+PROPERTY_COL4
                 +",p."+PROPERTY_COL5
@@ -408,17 +409,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 +",p."+PROPERTY_COL12
                 +",p."+PROPERTY_COL13
                 +",p."+PROPERTY_COL14
-                +",p."+PROPERTY_COL15;
-        String sql = "SELECT " + columnList + " FROM " + PROPERTY_TABLE + " p WHERE " + PROPERTY_COL2 + " = ?;";
+                +",p."+PROPERTY_COL15
+                +",r."+RENTED_PROPERTY_COL7;
+        String sql = "SELECT " + columnList + " FROM " + PROPERTY_TABLE + " p LEFT OUTER JOIN " + RENTED_PROPERTY_TABLE + " r ON r.PROPERTY_ID = p.PROPERTY_ID WHERE " + PROPERTY_COL2 + " = ?;";
         try{
             SQLiteDatabase sqLiteDatabase = getReadableDatabase();
             Cursor cursor;
             cursor = sqLiteDatabase.rawQuery(sql,new String[]{String.valueOf(userId)});
             while (cursor.moveToNext())
             {
+                rentedProperty = new RentedProperty();
                 rent = new Rent();
                 setRentFromCursor(rent,cursor,0);
-                rentList.add(rent);
+                rentedProperty.setActiveFlag(cursor.getInt(15));
+                rentedProperty.setRent(rent);
+                rentList.add(rentedProperty);
             }
             return rentList;
         }
@@ -427,5 +432,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Log.e("ERROR CATCH", "loginCheck: " + e.getMessage() );
         }
         return rentList;
+    }
+
+    public boolean removeRentendProperty(int rentedPropertyId) {
+
+        try
+        {
+            SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(RENTED_PROPERTY_COL7,0);
+            int affectedRows = sqLiteDatabase.update(RENTED_PROPERTY_TABLE,contentValues,RENTED_PROPERTY_COL1 + " = ?",new String[]{String.valueOf(rentedPropertyId)});
+            if(affectedRows==-1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+        catch (Exception e)
+        {
+            Log.e("ERROR CHECK", "removeRentendProperty: " + e.getMessage());
+        }
+        return false;
     }
 }

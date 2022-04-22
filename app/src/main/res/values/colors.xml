@@ -20,4 +20,8 @@
 
     <color name="colorPorcelain">#F2DFDFDF</color>
     <color name="blue">#0097A7</color>
+
+    <color name="green">#FF80E465</color>
+    <color name="red">#FFF34848</color>
+
 </resources>

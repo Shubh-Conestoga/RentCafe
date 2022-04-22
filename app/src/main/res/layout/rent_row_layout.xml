@@ -13,6 +13,13 @@
         android:layout_height="120dp"
         android:orientation="vertical" >
 
+        <TextView
+            android:layout_width="20sp"
+            android:layout_height="match_parent"
+            android:id="@+id/view_rental_status"
+            android:visibility="gone"
+            />
+
         <ImageView
             android:id="@+id/house_image"
             android:layout_width="100dp"
@@ -21,6 +28,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
+            android:layout_toRightOf="@id/view_rental_status"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_baseline_add_business_24" />
 

@@ -11,8 +11,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.shrijee.rentcafe.MyRentFragment;
+import com.shrijee.rentcafe.R;
+import com.shrijee.rentcafe.RentalFragment;
+import com.shrijee.rentcafe.database.DatabaseHelper;
 import com.shrijee.rentcafe.model.RentedProperty;
 
 import java.util.List;
@@ -37,7 +41,19 @@ public class RentDeleteDialog extends DialogFragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
-                Toast.makeText(getContext(),position+"",Toast.LENGTH_SHORT).show();
+                boolean isDeleted = new DatabaseHelper(getContext()).removeRentendProperty(rentedPropertyList.get(position).getRentedPropertyId());
+                if(isDeleted)
+                {
+                    Toast.makeText(getContext(),"Rent has been removed successfully!!!",Toast.LENGTH_SHORT).show();
+                    rentedPropertyList.remove(position);
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.frm_frame_layout,new MyRentFragment());
+                    transaction.commit();
+                }
+                else
+                {
+                    Toast.makeText(getContext(),"Something went wrong!!",Toast.LENGTH_SHORT).show();
+                }
                 dialogInterface.dismiss();
 
             }

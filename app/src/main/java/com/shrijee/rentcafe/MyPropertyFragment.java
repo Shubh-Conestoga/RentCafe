@@ -56,9 +56,9 @@ public class MyPropertyFragment extends Fragment {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        List<Rent> rentedDetails = databaseHelper.getRenteePropertyDetails(userId);
+        List<RentedProperty> rentedDetails = databaseHelper.getRenteePropertyDetails(userId);
 
-        RentAdapter rentAdapter = new RentAdapter(rentedDetails, new RentAdapter.OnRentClickListner() {
+        MyPropertyAdaptor rentAdapter = new MyPropertyAdaptor(rentedDetails, new RentAdapter.OnRentClickListner() {
             @Override
             public void onRentClick(View view, int position) {
             }

@@ -24,6 +24,8 @@ public class MyRentFragment extends Fragment {
     RecyclerView mRecyclerView;
     SharedPreferences sharedPreferences;
     String email = "";
+    RentDescriptionAdapter rentDescriptionAdapter ;
+    List<RentedProperty> rentedPropertyList;
 
     public MyRentFragment() {
         // Required empty public constructor
@@ -45,18 +47,24 @@ public class MyRentFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        rentDescriptionAdapter.setData(rentedPropertyList);
+    }
+
     private void setWidgets(View view) {
         DatabaseHelper databaseHelper = new DatabaseHelper(getContext());
         mRecyclerView = view.findViewById(R.id.recycler_view_my_rnt);
         int userId = email.isEmpty() ? -1 : databaseHelper.getRenterIdByEmail(email);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        List<RentedProperty> rentedDetails = databaseHelper.getRentedPropertyDetails("RENTEE_ID",userId);
-        RentDescriptionAdapter rentDescriptionAdapter = new RentDescriptionAdapter(rentedDetails, new RentDescriptionAdapter.MyRentClickListner() {
+        rentedPropertyList = databaseHelper.getRentedPropertyDetails("RENTEE_ID",userId);
+        rentDescriptionAdapter = new RentDescriptionAdapter(rentedPropertyList, new RentDescriptionAdapter.MyRentClickListner() {
             @Override
             public void onMyRentClickListner(int position) {
                 Toast.makeText(getContext(),"Clicked",Toast.LENGTH_SHORT).show();
-                RentDeleteDialog rentDeleteDialog = new RentDeleteDialog(rentedDetails,position);
+                RentDeleteDialog rentDeleteDialog = new RentDeleteDialog(rentedPropertyList,position);
                 rentDeleteDialog.show(getParentFragmentManager(),"Delete Fragment");
             }
         });
