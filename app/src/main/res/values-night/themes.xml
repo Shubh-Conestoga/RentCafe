@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.AppCompat.DayNight.NoActionBar.RentCafe">
+    <style name="Theme.NoActionBar.RentCafe" parent="Theme.RentCafe">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>

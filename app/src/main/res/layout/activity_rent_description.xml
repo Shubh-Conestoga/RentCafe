@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".RentDescriptionActivity">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/ic_back_registrationActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="26dp"
+        android:onClick="backButtonClicked"
+        android:src="@drawable/keyboard_backspace_black" />
+
+    <ImageView
+        android:id="@+id/property_image"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:fitsSystemWindows="true"
+        android:src="@drawable/ic_baseline_add_business_24" />
+
+    <TextView
+        android:id="@+id/property_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center"
+        android:text="Hazelview"
+        android:textColor="@color/gray14"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_marginBottom="75dp"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/property_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray14"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:text="Apartment"
+                android:textAlignment="center"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/property_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:drawableStart="@drawable/location_icon_rentcafe"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Waterloo, Ontario N2J4H2 wkjdekdjwef wekjfbrf rgfbrg regrj"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/property_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="5dp"
+                android:drawablePadding="12dp"
+                android:drawableStart="@drawable/dollar_logo"
+                android:fontFamily="@font/poppins_regular"
+                android:text="4000 CAD / Year"
+                android:gravity="center"
+                android:textColor="@color/blue"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center" >
+
+                    <TextView
+                        android:id="@+id/bedroom"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="12dp"
+                        android:drawablePadding="12dp"
+                        android:drawableStart="@drawable/bedroom_logo"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="3 Beds"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/bathroom"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="12dp"
+                        android:drawablePadding="12dp"
+                        android:drawableStart="@drawable/bathroom_logo"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="2 Bathrooms"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center" >
+
+                    <TextView
+                        android:id="@+id/hydro"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="12dp"
+                        android:drawablePadding="12dp"
+                        android:drawableStart="@drawable/hydro_logo"
+                        android:drawableEnd="@drawable/unavailable_logo"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Hydro"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/water"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="12dp"
+                        android:drawablePadding="12dp"
+                        android:drawableStart="@drawable/water_logo"
+                        android:drawableEnd="@drawable/unavailable_logo"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Water"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center" >
+
+                    <TextView
+                        android:id="@+id/heat"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="12dp"
+                        android:drawablePadding="12dp"
+                        android:drawableStart="@drawable/heat_logo"
+                        android:drawableEnd="@drawable/unavailable_logo"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Heat"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/microwave"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="12dp"
+                        android:drawablePadding="12dp"
+                        android:drawableStart="@drawable/microwave_logo"
+                        android:drawableEnd="@drawable/unavailable_logo"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Microwave"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center" >
+
+                    <TextView
+                        android:id="@+id/furnished"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="12dp"
+                        android:drawablePadding="12dp"
+                        android:drawableStart="@drawable/furnished_logo"
+                        android:drawableEnd="@drawable/unavailable_logo"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Furnished"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/parking"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="12dp"
+                        android:drawablePadding="12dp"
+                        android:drawableStart="@drawable/parking_logo"
+                        android:drawableEnd="@drawable/unavailable_logo"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Parking"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="25dp"
+                android:textColor="@color/gray14"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/description"
+                android:textAlignment="center"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/property_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="14sp"
+                android:text="Description........." />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:padding="3dp"
+        android:weightSum="5">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/rent_btn"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_margin="3dp"
+            android:background="@drawable/btn_capsule_gray14"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/rent_btn"
+            android:textColor="@color/white"
+            android:onClick="renBtnClicked"
+            android:layout_weight="5"
+            android:textSize="16sp" />
+
+      <ImageButton
+          android:id="@+id/desc_call_btn"
+          android:layout_width="50dp"
+          android:layout_marginLeft="15dp"
+          android:layout_height="50dp"
+          android:layout_weight="1"
+          android:padding="16sp"
+          android:layout_gravity="center_horizontal"
+          android:src="@drawable/ic_baseline_call_24"
+          android:background="@drawable/call_btn_background"/>
+    </LinearLayout>
+</RelativeLayout>
