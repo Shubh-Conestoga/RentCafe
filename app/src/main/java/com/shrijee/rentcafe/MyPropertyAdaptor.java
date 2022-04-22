@@ -80,6 +80,27 @@ public class MyPropertyAdaptor extends RecyclerView.Adapter<RecyclerView.ViewHol
         myViewHolder.nameView.setText(rent.getRentName());
         myViewHolder.priceView.setText(String.valueOf(rent.getPrice()));
 
+        if(rent.getImageURL().equals("1"))
+            myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_1);
+        else if(rent.getImageURL().equals("2"))
+            myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_2);
+        else if(rent.getImageURL().equals("3"))
+            myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_3);
+        else if(rent.getImageURL().equals("4"))
+            myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_4);
+        else if(rent.getImageURL().equals("5"))
+            myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_5);
+        else if(rent.getImageURL().equals("6"))
+            myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_6);
+        else if(rent.getImageURL().equals("7"))
+            myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_7);
+        else if(rent.getImageURL().equals("8"))
+            myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_8);
+        else if(rent.getImageURL().equals("9"))
+            myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_9);
+        else
+            myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_10);
+
         if(rentList.get(position).getActiveFlag()==1)
             myViewHolder.statusView.setBackgroundColor(greenColor);
         else

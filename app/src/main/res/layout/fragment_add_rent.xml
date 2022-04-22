@@ -430,30 +430,6 @@
                     android:textSize="14sp"
                     tools:ignore="TouchTargetSizeCheck" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="18dp"
-                    android:layout_marginStart="30dp" >
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:text="@string/image_selection"
-                        android:textSize="16sp"
-                        android:layout_marginTop="8dp"/>
-
-                    <ImageView
-                        android:id="@+id/pickphoto_btn"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="15dp"
-                        android:elevation="10dp"
-                        android:src="@drawable/pick_photo_rentcafe" />
-
-                </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/list_property_btn"

@@ -50,8 +50,6 @@ public class AddRentFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         databaseHelper = new DatabaseHelper(getContext());
         super.onCreate(savedInstanceState);
-        Toast.makeText(getContext(),String.valueOf(new Random().nextInt(10)+1),Toast.LENGTH_SHORT).show();
-
     }
 
     @Override
