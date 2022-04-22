@@ -21,6 +21,7 @@ import java.util.List;
 
 public class MyRentFragment extends Fragment {
 
+    //widget and data
     RecyclerView mRecyclerView;
     SharedPreferences sharedPreferences;
     String email = "";
@@ -41,8 +42,10 @@ public class MyRentFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_rent, container, false);
+        //getting email from sharedpref
         sharedPreferences = getActivity().getSharedPreferences(MainActivity.sharedPrefrence, Context.MODE_PRIVATE);
         email = sharedPreferences.getString("email","");
+        //setting the widgets
         setWidgets(view);
         return view;
     }
@@ -59,10 +62,13 @@ public class MyRentFragment extends Fragment {
         int userId = email.isEmpty() ? -1 : databaseHelper.getRenterIdByEmail(email);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        //getting rentedProperty data from databaseHelper Class
         rentedPropertyList = databaseHelper.getRentedPropertyDetails("RENTEE_ID",userId);
+        //creating adapter and setting it to recyclerView
         rentDescriptionAdapter = new RentDescriptionAdapter(rentedPropertyList, new RentDescriptionAdapter.MyRentClickListner() {
             @Override
             public void onMyRentClickListner(int position) {
+//                on click of item creting and  showing an alertDialog using RentDeleteDialog
                 RentDeleteDialog rentDeleteDialog = new RentDeleteDialog(rentedPropertyList,position);
                 rentDeleteDialog.show(getParentFragmentManager(),"Delete Fragment");
             }

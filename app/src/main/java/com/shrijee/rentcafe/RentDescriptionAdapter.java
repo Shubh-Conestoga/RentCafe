@@ -16,27 +16,33 @@ import java.util.List;
 
 public class RentDescriptionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+        //data
         List<RentedProperty> rentList = null;
+        //click listner interface
         MyRentClickListner myRentClickListner = null;
 
         public RentDescriptionAdapter()
         {}
 
+        //constructor
         public RentDescriptionAdapter(List<RentedProperty> rentList,MyRentClickListner myRentClickListner)
         {
             this.rentList = rentList;
             this.myRentClickListner = myRentClickListner;
         }
 
+        //setting the data
         public void setData(List<RentedProperty> rentList)
         {
             this.rentList = rentList;
             notifyDataSetChanged();
         }
 
+        //ViewHolder Class
         class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
         {
 
+            //Widgts and setting widgets in constructor
             TextView priceView,nameView,locationView,typeView;
             ImageView propertyPhoto;
 
@@ -52,20 +58,22 @@ public class RentDescriptionAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
             @Override
             public void onClick(View view) {
-                myRentClickListner.onMyRentClickListner(getAdapterPosition());
+//                onclick call onMyRentClickListner btn
+                 myRentClickListner.onMyRentClickListner(getAdapterPosition());
             }
         }
         @NonNull
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            //getting the inflatef view and creating and returning the inflated view
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rent_row_layout,parent,false);
             return new MyViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+            //setting the data to widgets
             MyViewHolder myViewHolder = (MyViewHolder) holder;
-            //set Image
             Rent rent = rentList.get(position).getRent();
             myViewHolder.locationView.setText(rent.getCity()+", "+rent.getState());
             myViewHolder.nameView.setText(rent.getRentName());
@@ -93,11 +101,13 @@ public class RentDescriptionAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_10);
         }
 
+        //total size of data
         @Override
         public int getItemCount() {
             return rentList.size();
         }
 
+        //clicklistner of MyRentClickKistner
         public interface MyRentClickListner
         {
             public void onMyRentClickListner(int position);

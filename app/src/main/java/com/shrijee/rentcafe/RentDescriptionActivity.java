@@ -22,6 +22,7 @@ import java.util.List;
 
 public class RentDescriptionActivity extends AppCompatActivity {
 
+    //data and widgets
     Rent rent;
     int userId=-1;
     SharedPreferences sharedPreferences;
@@ -34,28 +35,40 @@ public class RentDescriptionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rent_description);
+        //dataabseHelper object creation
         databaseHelper = new DatabaseHelper(this);
+        //getting sharedPref and gettign email
         sharedPreferences = getSharedPreferences(MainActivity.sharedPrefrence,MODE_PRIVATE);
         String email = sharedPreferences.getString("email","");
+        //getting userId from databaseHelper
         userId = email.isEmpty() ? -1 : databaseHelper.getRenterIdByEmail(email);
+        //getting rent data from intent
         rent = (Rent)getIntent().getSerializableExtra("RENT_DATA");
+        //setting the widgets
         setWidgets();
+        //setting data to widgets
         setData();
+        //setting clickListners
         setClickListners();
     }
 
     private void setClickListners() {
         callBtn.setOnClickListener(new View.OnClickListener() {
             @Override
+            //on click of cll button
             public void onClick(View view) {
+                //getting phone number of user by renter
                 String phoneNo = new DatabaseHelper(getApplicationContext()).getPhoneNoById(rent.getRenter());
+                //if phoneNo is not empty then
                 if(!phoneNo.isEmpty())
                 {
+                    //creating and implicit intent and for dialing the given phone phone no of renter and starting the activity
                     Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel","+1"+String.valueOf(phoneNo),null));
                     startActivity(intent);
                 }
                 else
                 {
+                    //otherwise showing the error
                     Toast.makeText(getApplicationContext(),"No Phone Number Available!",Toast.LENGTH_SHORT).show();
                 }
             }
@@ -75,7 +88,9 @@ public class RentDescriptionActivity extends AppCompatActivity {
         priceEle.setText(String.valueOf(rent.getPrice()));
         bathroomEle.setText(rent.getNoOfBathroom() + " Bathrooms");
         bedroomEle.setText(rent.getNoOfBedroom() + " Bedrooms");
+//        it includes all the available utilities
         List<String> utilities = rent.getUtilities();
+        //setting the yes and cross symbol according to the data
         for (String utility : utilities)
         {
             if(utility.equals("Microwave"))
@@ -90,6 +105,7 @@ public class RentDescriptionActivity extends AppCompatActivity {
 
         descriptionEle.setText(rent.getDescription());
 
+        //setting the image
         if(rent.getImageURL().equals("1"))
             propertyImage.setImageDrawable(MainActivity.PHOTO_1);
         else if(rent.getImageURL().equals("2"))
@@ -132,11 +148,14 @@ public class RentDescriptionActivity extends AppCompatActivity {
         callBtn = findViewById(R.id.desc_call_btn);
     }
 
+    //backbutton click then call onBackPressed funtion
     public void backButtonClicked(View view) {
         onBackPressed();
     }
 
+    //on rent btn gets clicked
     public void renBtnClicked(View view) {
+        //setting the data
         RentedProperty rentedProperty = new RentedProperty();
         rentedProperty.setRent(rent);
         rentedProperty.setStartingDate(new Date());
@@ -144,7 +163,9 @@ public class RentDescriptionActivity extends AppCompatActivity {
         rentedProperty.setActiveFlag(1);
         rentedProperty.setRenterId(rent.getRenter());
         rentedProperty.setRenteeId(userId);
+        //saving the databaseHelper using save function
         boolean isPropertyRented = databaseHelper.save(rentedProperty);
+        //if it returns true the showing the toast and call onBackpressed funtion
         if(isPropertyRented)
         {
             Toast.makeText(this,"Property Rented Success!!",Toast.LENGTH_LONG).show();
@@ -152,6 +173,7 @@ public class RentDescriptionActivity extends AppCompatActivity {
         }
         else
         {
+            //showing an error
             Toast.makeText(this,"Something went wrong!!",Toast.LENGTH_LONG).show();
         }
     }

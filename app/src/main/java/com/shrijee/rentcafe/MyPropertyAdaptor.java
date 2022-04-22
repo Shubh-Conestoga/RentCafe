@@ -24,12 +24,14 @@ public class MyPropertyAdaptor extends RecyclerView.Adapter<RecyclerView.ViewHol
     public MyPropertyAdaptor()
     {}
 
+    //getting data and implemetation of ClickListner
     public MyPropertyAdaptor(List<RentedProperty> rentList, RentAdapter.OnRentClickListner onRentClickListner)
     {
         this.rentList = rentList;
         this.onRentClickListner = onRentClickListner;
     }
 
+    //setting data and notifying
     public void setData(List<RentedProperty> rentList)
     {
         this.rentList = rentList;
@@ -37,6 +39,7 @@ public class MyPropertyAdaptor extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
 
+    //View holder class
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
 
@@ -53,26 +56,31 @@ public class MyPropertyAdaptor extends RecyclerView.Adapter<RecyclerView.ViewHol
             statusView.setVisibility(View.VISIBLE);
             itemView.setOnClickListener(this);
         }
-
+//   called whenever an item gets clicked
         @Override
         public void onClick(View view) {
+//            then calling the onRentClick function
             onRentClickListner.onRentClick(view,getAdapterPosition());
         }
     }
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //inflating the view
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rent_row_layout,parent,false);
+//        getting the color ids
         if(greenColor==-1)
         {
             greenColor = view.getContext().getResources().getColor(R.color.green, view.getContext().getTheme());
             redColor = view.getContext().getResources().getColor(R.color.red, view.getContext().getTheme());
         }
+        //returning the holder class
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        //biding the data with views
         MyViewHolder myViewHolder = (MyViewHolder) holder;
         //set Image
         Rent rent = rentList.get(position).getRent();
@@ -101,6 +109,7 @@ public class MyPropertyAdaptor extends RecyclerView.Adapter<RecyclerView.ViewHol
         else
             myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_10);
 
+        //if rented then show green otherwise red line
         if(rentList.get(position).getActiveFlag()==1)
             myViewHolder.statusView.setBackgroundColor(greenColor);
         else
@@ -108,11 +117,13 @@ public class MyPropertyAdaptor extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     }
 
+    //total data
     @Override
     public int getItemCount() {
         return rentList.size();
     }
 
+    //interface for OnRentClickListner
     interface OnRentClickListner
     {
         void onRentClick(View view, int position);

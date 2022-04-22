@@ -21,6 +21,7 @@ import java.util.List;
 
 public class MyPropertyFragment extends Fragment {
 
+    //widgets
     RecyclerView mRecyclerView;
     SharedPreferences sharedPreferences;
     String email = "";
@@ -28,8 +29,6 @@ public class MyPropertyFragment extends Fragment {
     public MyPropertyFragment() {
         // Required empty public constructor
     }
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,8 +41,10 @@ public class MyPropertyFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_property, container, false);
+        //shared prefrence and getting email form it
         sharedPreferences = getActivity().getSharedPreferences(MainActivity.sharedPrefrence, Context.MODE_PRIVATE);
         email = sharedPreferences.getString("email","");
+        //setting the widgets
         setWidgets(view);
         return view;
     }
@@ -52,6 +53,7 @@ public class MyPropertyFragment extends Fragment {
     {
         DatabaseHelper databaseHelper = new DatabaseHelper(getContext());
         mRecyclerView = view.findViewById(R.id.recycler_view_my_property);
+        //getting userId from email using DatabaseHelper
         int userId = email.isEmpty() ? -1 : databaseHelper.getRenterIdByEmail(email);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -61,14 +63,12 @@ public class MyPropertyFragment extends Fragment {
         MyPropertyAdaptor rentAdapter = new MyPropertyAdaptor(rentedDetails, new RentAdapter.OnRentClickListner() {
             @Override
             public void onRentClick(View view, int position) {
+                //doing nothing in on click method
             }
         });
 
+        //setting the adaptor
         mRecyclerView.setAdapter(rentAdapter);
     }
 
-    public void kissMe()
-    {
-
-    }
 }

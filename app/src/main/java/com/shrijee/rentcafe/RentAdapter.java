@@ -17,18 +17,22 @@ import com.shrijee.rentcafe.model.Rent;
 import java.util.List;
 
 public class RentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    // data
     List<Rent> rentList = null;
+    //listner
     OnRentClickListner onRentClickListner = null;
 
     public RentAdapter()
     {}
 
+    //contructor
     public RentAdapter(List<Rent> rentList,OnRentClickListner onRentClickListner)
     {
         this.rentList = rentList;
         this.onRentClickListner = onRentClickListner;
     }
 
+    //setting the data
     public void setData(List<Rent> rentList)
     {
         this.rentList = rentList;
@@ -36,14 +40,17 @@ public class RentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
 
+    //holder class
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
 
+        //widget
         TextView priceView,nameView,locationView,propertyTypeView;
         ImageView propertyPhoto;
         Context context;
         public MyViewHolder(@NonNull View itemView,Context context) {
             super(itemView);
+            //setting the widgets
             priceView = itemView.findViewById(R.id.price);
             nameView = itemView.findViewById(R.id.house_title);
             locationView = itemView.findViewById(R.id.location);
@@ -53,6 +60,7 @@ public class RentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             itemView.setOnClickListener(this);
         }
 
+        //onClick
         @Override
         public void onClick(View view) {
             onRentClickListner.onRentClick(view,getAdapterPosition());
@@ -70,28 +78,41 @@ public class RentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         MyViewHolder myViewHolder = (MyViewHolder) holder;
         //set Image
 
+        //getting the rent
         Rent rent = rentList.get(position);
-
-        if(rent.getImageURL().equals("1"))
-            myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_1);
-        else if(rent.getImageURL().equals("2"))
-            myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_2);
-        else if(rent.getImageURL().equals("3"))
-            myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_3);
-        else if(rent.getImageURL().equals("4"))
-            myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_4);
-        else if(rent.getImageURL().equals("5"))
-            myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_5);
-        else if(rent.getImageURL().equals("6"))
-            myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_6);
-        else if(rent.getImageURL().equals("7"))
-            myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_7);
-        else if(rent.getImageURL().equals("8"))
-            myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_8);
-        else if(rent.getImageURL().equals("9"))
-            myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_9);
-        else
-            myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_10);
+        //switch case for setting the image and other data
+        switch (rent.getImageURL()) {
+            case "1":
+                myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_1);
+                break;
+            case "2":
+                myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_2);
+                break;
+            case "3":
+                myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_3);
+                break;
+            case "4":
+                myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_4);
+                break;
+            case "5":
+                myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_5);
+                break;
+            case "6":
+                myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_6);
+                break;
+            case "7":
+                myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_7);
+                break;
+            case "8":
+                myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_8);
+                break;
+            case "9":
+                myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_9);
+                break;
+            default:
+                myViewHolder.propertyPhoto.setImageDrawable(MainActivity.PHOTO_10);
+                break;
+        }
 
 
 
@@ -100,11 +121,13 @@ public class RentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         myViewHolder.priceView.setText(String.valueOf(rent.getPrice()));
     }
 
+    //getting the total count of data
     @Override
     public int getItemCount() {
         return rentList.size();
     }
 
+    //interface for OnRentClickListner
     interface OnRentClickListner
     {
         void onRentClick(View view, int position);

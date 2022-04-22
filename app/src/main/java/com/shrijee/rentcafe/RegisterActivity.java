@@ -19,6 +19,7 @@ import java.util.List;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    //Widgets and validation and data
     EditText emailEle,passwordEle,fNameEle,contactEle,lNameEle;
     Button registerBtnEle;
     ImageView backBtnEle;
@@ -28,10 +29,13 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        creating an instance of DatabaseHelper
         databaseHelper = new DatabaseHelper(getApplicationContext());
         setContentView(R.layout.activity_register);
+//        setting the widgets
         setWidgets();
 
+//        on register btn click this will called
         registerBtnEle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,8 +63,10 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
+    //on register btn click
     public void registerBtnClicked(View view) {
         try {
+            //getting the data from form
             String emailText = emailEle.getText().toString().trim();
             String passwordText = passwordEle.getText().toString().trim();
             String fnameText = fNameEle.getText().toString().trim();
@@ -69,20 +75,25 @@ public class RegisterActivity extends AppCompatActivity {
             String nameText = fnameText + " " + lnameText;
 
             String[] stringArray = {emailText, passwordText, nameText, contactText};
+            //validation error if any occurs
             if(!validation.stringArrayValidation(stringArray))
             {
                 Toast.makeText(getApplicationContext(),"Please enter required details to register",Toast.LENGTH_LONG).show();
             }
             else
             {
+                //else creating sand saving the data in DB
                 //register user
                 User user = new User(nameText,emailText,passwordText,contactText);
+//                saving data in DB using DatabaseHelper class
                 boolean saved = databaseHelper.save(user);
+//                if data saved then move user to login activity and showing the toast
                 if(saved)
                 {
                     Toast.makeText(getApplicationContext(),"Registered Successfully!",Toast.LENGTH_SHORT).show();
                     moveToLoginActivity();
                 }
+                //else showing the error
                 else
                 {
                     Toast.makeText(getApplicationContext(),"Something went wrong!",Toast.LENGTH_SHORT).show();
@@ -91,11 +102,13 @@ public class RegisterActivity extends AppCompatActivity {
         }
         catch (Exception e)
         {
+            //showing exception message and toasing the error
             Toast.makeText(getApplicationContext(),"Please try again!",Toast.LENGTH_LONG).show();
             Log.e("CATCH ERROR", "REGISTER registerBtnClicked: "+ e.getMessage() );
         }
     }
 
+    // moving user to login activity
     private void moveToLoginActivity() {
         Intent loginactivityIntent = new Intent(this,MainActivity.class);
         startActivity(loginactivityIntent);
