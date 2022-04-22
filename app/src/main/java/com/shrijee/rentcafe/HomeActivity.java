@@ -56,6 +56,7 @@ public class HomeActivity extends AppCompatActivity {
                         fragment = new AddRentFragment();
                         break;
                     case R.id.view_property:
+                        fragment = new MyPropertyFragment();
                         break;
                     case R.id.logout:
                         sharedPreferences.edit().clear().commit();

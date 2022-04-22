@@ -1,91 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
-    app:cardCornerRadius="40dp"
-    app:cardElevation="20dp"
-    android:layout_marginTop="10dp"
-    app:contentPadding="5dp">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="3dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="10dp">
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/txt_rentname"
-            android:layout_width="wrap_content"
-            android:layout_height="43dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:text="Name"
-            android:textSize="36sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/img_rent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/txt_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="16dp"
-            android:text="500000"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/textView3"
-            app:layout_constraintTop_toBottomOf="@+id/txt_rentname" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="$"
-            android:textColor="#201E1E"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/txt_price"
-            app:layout_constraintStart_toEndOf="@+id/img_rent"
-            app:layout_constraintTop_toTopOf="@+id/txt_price" />
+        android:layout_height="120dp"
+        android:orientation="vertical" >
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/txt_location"
-            app:layout_constraintStart_toEndOf="@+id/img_rent"
-            app:layout_constraintTop_toTopOf="@+id/txt_location"
-            app:srcCompat="@drawable/ic_baseline_pin_drop_24" />
+            android:id="@+id/house_image"
+            android:layout_width="100dp"
+            android:layout_height="90dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_baseline_add_business_24" />
 
         <TextView
-            android:id="@+id/txt_location"
-            android:layout_width="wrap_content"
+            android:id="@+id/house_title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="16dp"
-            android:text="Waterloo, Canada"
-            android:textSize="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toRightOf="@id/house_image"
+            android:text="Red Bay Apartment"
+            android:textColor="@color/black"
+            android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/txt_price" />
-
-        <ImageView
-            android:id="@+id/img_rent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="32dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/ic_baseline_add_business_24"
+            android:fontFamily="@font/poppins_bold"
             />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/house_title"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="0dp"
+            android:layout_toRightOf="@id/house_image"
+            android:fontFamily="@font/poppins_regular"
+            android:text="$8000/year"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/house_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/price"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/house_image"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Apartment"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/location_icon_rentcafe"
+            android:layout_marginLeft="10dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginTop="2dp"
+            android:layout_below="@id/house_type"
+            android:layout_toRightOf="@id/house_image"
+            android:src="@drawable/location_icon_rentcafe" />
+
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/house_type"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@id/location_icon_rentcafe"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Waterloo, Ontario"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
 </androidx.cardview.widget.CardView>

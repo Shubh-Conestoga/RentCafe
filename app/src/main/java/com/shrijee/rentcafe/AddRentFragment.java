@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -23,22 +24,21 @@ import com.shrijee.rentcafe.model.Rent;
 
 import java.util.Arrays;
 import java.util.List;
+import com.shrijee.rentcafe.miscellaneous.Validation;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AddRentFragment} factory method to
- * create an instance of this fragment.
- */
+
+
 public class AddRentFragment extends Fragment {
 
 
-    EditText name,price,bedroom,bathroom,description,pincode,state,city;
-    CheckBox hydro,water,heat,microwave;
-    RadioGroup furnished,parking;
-    Spinner propertyType;
-    Button listPropertyBtn;
+    EditText nameEle, addressEle, priceEle,bedroomEle,bathroomEle,descriptionEle,zipcodeEle,stateEle,cityEle;
+    CheckBox noneEle, hydroEle,waterEle,heatEle,microwaveEle;
+    RadioGroup furnishedEle,parkingEle;
+    Spinner propertyTypeEle;
+    Button listPropertyBtnEle;
     DatabaseHelper databaseHelper;
     String[] propertyTypes = {"Apartment","House","Condo","Shop","Parking"};
+    Validation validation = new Validation();
 
     public AddRentFragment() {
 
@@ -59,86 +59,92 @@ public class AddRentFragment extends Fragment {
     }
 
     private void setWidgets(View view) {
-        name = view.findViewById(R.id.rentname_edittext);
-        price = view.findViewById(R.id.price_edittext);
-        bedroom = view.findViewById(R.id.bedroom_edittext);
-        bathroom = view.findViewById(R.id.bathroom_edittext);
-        description = view.findViewById(R.id.description_edittext);
-        pincode = view.findViewById(R.id.zip_code_edittext);
-        state = view.findViewById(R.id.state_edittext);
-        city = view.findViewById(R.id.city_edittext);
+        nameEle = view.findViewById(R.id.name_edittext);
+        priceEle = view.findViewById(R.id.price_edittext);
+        bedroomEle = view.findViewById(R.id.bedroom_edittext);
+        bathroomEle = view.findViewById(R.id.bathroom_edittext);
+        descriptionEle = view.findViewById(R.id.description_edittext);
+        zipcodeEle = view.findViewById(R.id.zipcode_edittext);
+        stateEle = view.findViewById(R.id.state_edittext);
+        cityEle = view.findViewById(R.id.city_edittext);
+        addressEle = view.findViewById(R.id.addrent_address_edittext);
 
-        propertyType = view.findViewById(R.id.property_type_spinner);
+        propertyTypeEle = view.findViewById(R.id.type_spinner);
         ArrayAdapter<String> propertyTypeAdapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,propertyTypes);
-        propertyType.setAdapter(propertyTypeAdapter);
-        propertyType.setSelection(0);
+        propertyTypeEle.setAdapter(propertyTypeAdapter);
+        propertyTypeEle.setSelection(0);
 
-        listPropertyBtn = view.findViewById(R.id.list_property_btn);
+        listPropertyBtnEle = view.findViewById(R.id.list_property_btn);
 
-        furnished = view.findViewById(R.id.furnished_radio_grp);
-        parking = view.findViewById(R.id.parking_radio_grp);
+        furnishedEle = view.findViewById(R.id.furnished_yesno_radioGrp);
+        parkingEle = view.findViewById(R.id.parking_yesno_radioGrp);
 
-        hydro = view.findViewById(R.id.hydro_checkbox);
-        water = view.findViewById(R.id.water_checkbox);
-        heat = view.findViewById(R.id.heat_checkbox);
-        microwave = view.findViewById(R.id.microwave_checkbox);
+        hydroEle = view.findViewById(R.id.utilities_hydro_chkbox);
+        waterEle = view.findViewById(R.id.utilities_water_chkbox);
+        heatEle = view.findViewById(R.id.utilities_heat_chkbox);
+        microwaveEle = view.findViewById(R.id.utilities_microwave_chkbox);
 
-        listPropertyBtn.setOnClickListener(new View.OnClickListener() {
+        listPropertyBtnEle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 boolean isValidated = true;
-                String rentName = name.getText().toString().trim();
-                String rentPrice = price.getText().toString().trim();
-                String rentBedroom = bedroom.getText().toString().trim();
-                String rentBathroom = bathroom.getText().toString().trim();
-                String rentPincode = pincode.getText().toString().trim();
-                String rentState = state.getText().toString().trim();
+                String rentName = nameEle.getText().toString().trim();
+                String rentPrice = priceEle.getText().toString().trim();
+                String rentBedroom = bedroomEle.getText().toString().trim();
+                String rentBathroom = bathroomEle.getText().toString().trim();
+                String rentPincode = zipcodeEle.getText().toString().trim();
+                String rentState = stateEle.getText().toString().trim();
+                String rentAddress = addressEle.getText().toString().trim();
 
-                String rentPropertyType = propertyType.getSelectedItem().toString().trim();
+                String rentPropertyType = propertyTypeEle.getSelectedItem().toString().trim();
 
-                String rentCity = city.getText().toString().trim();
-                String rentDescription = description.getText().toString().trim();
+                String rentCity = cityEle.getText().toString().trim();
+                String rentDescription = descriptionEle.getText().toString().trim();
 
                 SQLiteDatabase database = databaseHelper.getReadableDatabase();
                 String email = getContext().getSharedPreferences(MainActivity.sharedPrefrence, Context.MODE_PRIVATE).getString("email","");
                 int userId = email.trim().isEmpty() ? -1 : databaseHelper.getRenterIdByEmail(email.trim());
 
-                String hydroUtilities = hydro.isChecked() ? "Hydro," : "";
-                String heatUtilities = heat.isChecked() ? "Heat," : "";
-                String waterUtilities = water.isChecked() ? "Water," : "";
-                String microwaveUtilities = microwave.isChecked() ? "Microwave," : "";
+                String hydroUtilities = hydroEle.isChecked() ? "Hydro," : "";
+                String heatUtilities = heatEle.isChecked() ? "Heat," : "";
+                String waterUtilities = waterEle.isChecked() ? "Water," : "";
+                String microwaveUtilities = microwaveEle.isChecked() ? "Microwave," : "";
                 String rentUtilities = hydroUtilities + heatUtilities + waterUtilities + microwaveUtilities;
                 if(!rentUtilities.isEmpty())
                     rentUtilities = rentUtilities.substring(0,rentUtilities.length()-1);
 
                 List<String> rentUtilitiesList = Arrays.asList(rentUtilities.split(","));
 
-                int rentFurnished = furnished.getCheckedRadioButtonId()==R.id.furnished_radio_btn_on ? 1 : 0;
-                int rentParking = parking.getCheckedRadioButtonId()==R.id.parking_radio_btn_on ? 1 : 0;
+                int rentFurnished = furnishedEle.getCheckedRadioButtonId()==R.id.furnished_yes_radioGrp ? 1 : 0;
+                int rentParking = parkingEle.getCheckedRadioButtonId()==R.id.parking_yes_radioGrp ? 1 : 0;
 
 
                 String errorMsg = "";
-                if(rentName.isEmpty())
+                if(!validation.stringValidation(rentName))
                 {
                     errorMsg += "Please Enter Name of property!\n";
                 }
-                if(rentPrice.isEmpty())
+                if(!validation.stringValidation(rentAddress))
+                {
+                    errorMsg += "Please Enter Name of property!\n";
+                }
+                if(!validation.intValidation(rentPrice))
                 {
                     errorMsg += "Please Enter Price of property!\n";
                 }
-                if(rentPincode.isEmpty())
+                if(!validation.stringValidation(rentPincode))
                 {
                     errorMsg += "Please Enter Pincode of property!\n";
                 }
-                if(rentState.isEmpty())
+                if(!validation.stringValidation(rentState))
                 {
                     errorMsg += "Please Enter State of property!\n";
                 }
-                if(rentCity.isEmpty())
+                if(!validation.stringValidation(rentCity))
                 {
                     errorMsg += "Please Enter City of property!\n";
                 }
-                if(rentPropertyType.isEmpty())
+                if(!validation.stringValidation(rentPropertyType))
                 {
                     errorMsg += "Please Choose Type of property!\n";
                 }
@@ -148,11 +154,13 @@ public class AddRentFragment extends Fragment {
                 }
                 else
                 {
-                    Rent rent = new Rent(rentName,rentPincode,rentCity,rentState,userId,Float.parseFloat(rentPrice),rentPropertyType,rentDescription,"",Integer.parseInt(rentBedroom), Integer.parseInt(rentBathroom),rentUtilitiesList,rentFurnished,rentParking);
+                    Rent rent = new Rent(rentName,rentAddress,rentPincode,rentCity,rentState,userId,Float.parseFloat(rentPrice),rentPropertyType,rentDescription,"",Integer.parseInt(rentBedroom), Integer.parseInt(rentBathroom),rentUtilitiesList,rentFurnished,rentParking);
                     boolean isAdded = databaseHelper.save(rent);
                     if(isAdded)
                     {
                         Toast.makeText(getContext(),"Rent details saved!!",Toast.LENGTH_SHORT).show();
+                        Intent homeactivityIntent = new Intent(getContext(), HomeActivity.class);
+                        startActivity(homeactivityIntent);
                     }
                     else
                     {
@@ -163,5 +171,8 @@ public class AddRentFragment extends Fragment {
         });
     }
 
-
+    private void moveToHomeActivity() {
+        Intent homeactivityIntent = new Intent(getContext(), HomeActivity.class);
+        startActivity(homeactivityIntent);
+    }
 }

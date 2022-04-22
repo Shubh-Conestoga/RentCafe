@@ -35,14 +35,15 @@ public class RentDescriptionAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         class MyViewHolder extends RecyclerView.ViewHolder
         {
 
-            TextView priceView,nameView,locationView;
+            TextView priceView,nameView,locationView,typeView;
             ImageView propertyPhoto;
             public MyViewHolder(@NonNull View itemView) {
                 super(itemView);
-                priceView = itemView.findViewById(R.id.txt_price);
-                nameView = itemView.findViewById(R.id.txt_rentname);
-                locationView = itemView.findViewById(R.id.txt_location);
-                propertyPhoto = itemView.findViewById(R.id.img_rent);
+                priceView = itemView.findViewById(R.id.price);
+                nameView = itemView.findViewById(R.id.house_title);
+                locationView = itemView.findViewById(R.id.location);
+                propertyPhoto = itemView.findViewById(R.id.house_image);
+                typeView = itemView.findViewById(R.id.house_type);
             }
         }
         @NonNull

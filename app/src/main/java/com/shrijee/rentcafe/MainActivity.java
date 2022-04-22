@@ -12,14 +12,17 @@ import android.widget.Toast;
 
 import com.shrijee.rentcafe.database.DatabaseHelper;
 import com.shrijee.rentcafe.model.User;
+import com.shrijee.rentcafe.miscellaneous.Validation;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button loginBtn;
-    EditText email,password;
+    Button loginBtnEle, registerBtnEle;
+    EditText emailEle,passwordEle;
     DatabaseHelper databaseHelper;
+    Validation validation = new Validation();
     public static String sharedPrefrence = "RENT_PREFRENCE";
     SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,18 +48,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setWidgets() {
-        loginBtn = findViewById(R.id.login_btn);
-        email = findViewById(R.id.city_edittext);
-        password = findViewById(R.id.state_edittext);
+        loginBtnEle = findViewById(R.id.login_btn);
+        emailEle = findViewById(R.id.email_edittext);
+        passwordEle = findViewById(R.id.password_edittext);
     }
 
     public void loginBtnClicked(View view) {
         try
         {
-            String emailText = email.getText().toString().trim();
-            String passwordText = password.getText().toString().trim();
+            String emailText = emailEle.getText().toString().trim();
+            String passwordText = passwordEle.getText().toString().trim();
 
-            if(emailText.isEmpty() || passwordText.isEmpty())
+            if(!validation.stringValidation(emailText) || !validation.stringValidation(passwordText))
             {
                 Toast.makeText(getApplicationContext(),"Please fill the email and password",Toast.LENGTH_LONG).show();
             }
@@ -70,12 +73,12 @@ public class MainActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("email",emailText);
                     editor.apply();
-//                    clearDetails();
                     moveToHomeActivity();
                 }
                 else
                 {
                     Toast.makeText(getApplicationContext(),"Wrong credentials",Toast.LENGTH_SHORT).show();
+                    clearDetails();
                 }
             }
         }
@@ -86,8 +89,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void clearDetails() {
-        password.setText("");
-        email.setText("");
+        passwordEle.setText("");
+        emailEle.setText("");
     }
 
     public void registerBtnClicked(View view) {

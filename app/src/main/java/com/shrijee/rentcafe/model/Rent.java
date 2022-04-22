@@ -1,11 +1,13 @@
 package com.shrijee.rentcafe.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Rent {
+public class Rent implements Serializable {
 
     private int rentId;
     private String rentName;
+    private String address;
     private String pincode;
     private String city;
     private String state;
@@ -19,13 +21,18 @@ public class Rent {
     private List<String> utilities;
     private int furnished;
     private int parking;
+    private int microwave;
+    private int hydro;
+    private int heat;
+    private int water;
 
     public Rent() {
     }
 
-    public Rent(int rentId, String rentName, String pincode, String city, String state, int renter, float price, String type, String description, String imageURL, int noOfBedroom, int noOfBathroom, List<String> utilities, int furnished, int parking) {
+    public Rent(int rentId, String rentName, String address, String pincode, String city, String state, int renter, float price, String type, String description, String imageURL, int noOfBedroom, int noOfBathroom, List<String> utilities, int furnished, int parking) {
         this.rentId = rentId;
         this.rentName = rentName;
+        this.address = address;
         this.pincode = pincode;
         this.city = city;
         this.state = state;
@@ -41,8 +48,9 @@ public class Rent {
         this.parking = parking;
     }
 
-    public Rent(String rentName, String pincode, String city, String state, int renter, float price, String type, String description, String imageURL, int noOfBedroom, int noOfBathroom, List<String> utilities, int furnished, int parking) {
+    public Rent(String rentName, String address, String pincode, String city, String state, int renter, float price, String type, String description, String imageURL, int noOfBedroom, int noOfBathroom, List<String> utilities, int furnished, int parking) {
         this.rentName = rentName;
+        this.address = address;
         this.pincode = pincode;
         this.city = city;
         this.state = state;
@@ -56,6 +64,38 @@ public class Rent {
         this.utilities = utilities;
         this.furnished = furnished;
         this.parking = parking;
+    }
+
+    public int getMicrowave() {
+        return microwave;
+    }
+
+    public void setMicrowave(int microwave) {
+        this.microwave = microwave;
+    }
+
+    public int getHydro() {
+        return hydro;
+    }
+
+    public void setHydro(int hydro) {
+        this.hydro = hydro;
+    }
+
+    public int getHeat() {
+        return heat;
+    }
+
+    public void setHeat(int heat) {
+        this.heat = heat;
+    }
+
+    public int getWater() {
+        return water;
+    }
+
+    public void setWater(int water) {
+        this.water = water;
     }
 
     public String getImageURL() {
@@ -64,6 +104,14 @@ public class Rent {
 
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public int getNoOfBedroom() {
@@ -178,8 +226,9 @@ public class Rent {
         this.description = description;
     }
 
-    public Rent(int rentId, String rentName, String pincode, String city, String state, int renter, float price, String type, String description) {
+    public Rent(int rentId, String rentName, String address, String pincode, String city, String state, int renter, float price, String type, String description) {
         this.rentId = rentId;
+        this.address = address;
         this.rentName = rentName;
         this.pincode = pincode;
         this.city = city;
@@ -189,4 +238,27 @@ public class Rent {
         this.type = type;
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "Rent{" +
+                "rentId=" + rentId +
+                ", rentName='" + rentName + '\'' +
+                ", address='" + address + '\'' +
+                ", pincode='" + pincode + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", renter=" + renter +
+                ", price=" + price +
+                ", type='" + type + '\'' +
+                ", description='" + description + '\'' +
+                ", imageURL='" + imageURL + '\'' +
+                ", noOfBedroom=" + noOfBedroom +
+                ", noOfBathroom=" + noOfBathroom +
+                ", utilities=" + utilities +
+                ", furnished=" + furnished +
+                ", parking=" + parking +
+                '}';
+    }
+
 }

@@ -54,6 +54,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static String PROPERTY_COL13 = "PROPERTY_FURNISHED";
     private static String PROPERTY_COL14 = "PROPERTY_PARKING";
     private static String PROPERTY_COL15 = "PROPERTY_IMAGE_URL";
+    private static String PROPERTY_COL16 = "PROPERTY_ADDRESS";
 
 
     private static String CREATE_PROPERTY =  "CREATE TABLE " + PROPERTY_TABLE + " ("
@@ -190,14 +191,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 SQLiteDatabase sqLiteDatabase = getWritableDatabase();
                 ContentValues contentValues = new ContentValues();
 
-                contentValues.put(PROPERTY_COL2, rentedProperty.getPropertyId() );
-                contentValues.put(PROPERTY_COL3, rentedProperty.getRenterId() );
-                contentValues.put(PROPERTY_COL4, rentedProperty.getRenteeId() );
-                contentValues.put(PROPERTY_COL5, rentedProperty.getDuration() );
-                contentValues.put(PROPERTY_COL6, rentedProperty.getStartingDate().getTime() );
-                contentValues.put(PROPERTY_COL7, rentedProperty.getActiveFlag() );
+                contentValues.put(RENTED_PROPERTY_COL2, rentedProperty.getRent().getRentId() );
+                contentValues.put(RENTED_PROPERTY_COL3, rentedProperty.getRenterId() );
+                contentValues.put(RENTED_PROPERTY_COL4, rentedProperty.getRenteeId() );
+                contentValues.put(RENTED_PROPERTY_COL5, rentedProperty.getDuration() );
+                contentValues.put(RENTED_PROPERTY_COL6, rentedProperty.getStartingDate().getTime() );
+                contentValues.put(RENTED_PROPERTY_COL7, rentedProperty.getActiveFlag() );
 
-                long affectedRows= sqLiteDatabase.insert(PROPERTY_TABLE,null,contentValues);
+                long affectedRows= sqLiteDatabase.insert(RENTED_PROPERTY_TABLE,null,contentValues);
                 return affectedRows != -1;
             }
             catch (Exception e)
@@ -213,10 +214,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     {
         List<Rent> rentList = new ArrayList<>();
         Rent rent = null;
-        String query = "SELECT * FROM " + PROPERTY_TABLE + ";";
+        String columnList = "p."+PROPERTY_COL1
+                +",p."+PROPERTY_COL2
+                +",p."+PROPERTY_COL3
+                +",p."+PROPERTY_COL4
+                +",p."+PROPERTY_COL5
+                +",p."+PROPERTY_COL6
+                +",p."+PROPERTY_COL7
+                +",p."+PROPERTY_COL8
+                +",p."+PROPERTY_COL9
+                +",p."+PROPERTY_COL10
+                +",p."+PROPERTY_COL11
+                +",p."+PROPERTY_COL12
+                +",p."+PROPERTY_COL13
+                +",p."+PROPERTY_COL14
+                +",p."+PROPERTY_COL15;
+        String query = "SELECT "+ columnList + " FROM " + PROPERTY_TABLE + " p LEFT JOIN " + RENTED_PROPERTY_TABLE + " r ON r.PROPERTY_ID = p.PROPERTY_ID WHERE  ACTIVE_FLAG IS  NULL OR ACTIVE_FLAG = ?;" ;
        try{
            SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-           Cursor cursor = sqLiteDatabase.rawQuery(query,null);
+           Cursor cursor = sqLiteDatabase.rawQuery(query,new String[]{String.valueOf(0)});
            while (cursor.moveToNext())
            {
                rent = new Rent();
@@ -281,7 +297,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String query = "SELECT "+ columns +" FROM " + RENTED_PROPERTY_TABLE + " r, " + PROPERTY_TABLE + " p";
         if(!searchColumn.isEmpty())
         {
-                query+=" WHERE " + "p.PROPERTY_ID = r.PROPERTY_ID" + searchColumn.trim().toUpperCase() + " = ? ;";
+                query+=" WHERE " + "p.PROPERTY_ID = r.PROPERTY_ID AND " + searchColumn.trim().toUpperCase() + " = ? ;";
         }
         else
         {
@@ -308,7 +324,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 rentedProperty.setRenterId(cursor.getInt(2));
                 rentedProperty.setRenteeId(cursor.getInt(3));
                 rentedProperty.setDuration(cursor.getInt(4));
-                rentedProperty.setStartingDate(new Date(cursor.getString(5)));
+                rentedProperty.setStartingDate(new Date(cursor.getInt(5)));
                 rentedProperty.setActiveFlag((cursor.getInt(6)));
 
                 setRentFromCursor(rent,cursor,7);
@@ -373,5 +389,43 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return userId;
         }
         return -1;
+    }
+
+    public List<Rent> getRenteePropertyDetails(int userId) {
+        List<Rent> rentList = new ArrayList<>();
+        Rent rent = null;
+        String columnList = "p."+PROPERTY_COL1
+                +",p."+PROPERTY_COL2
+                +",p."+PROPERTY_COL3
+                +",p."+PROPERTY_COL4
+                +",p."+PROPERTY_COL5
+                +",p."+PROPERTY_COL6
+                +",p."+PROPERTY_COL7
+                +",p."+PROPERTY_COL8
+                +",p."+PROPERTY_COL9
+                +",p."+PROPERTY_COL10
+                +",p."+PROPERTY_COL11
+                +",p."+PROPERTY_COL12
+                +",p."+PROPERTY_COL13
+                +",p."+PROPERTY_COL14
+                +",p."+PROPERTY_COL15;
+        String sql = "SELECT " + columnList + " FROM " + PROPERTY_TABLE + " p WHERE " + PROPERTY_COL2 + " = ?;";
+        try{
+            SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+            Cursor cursor;
+            cursor = sqLiteDatabase.rawQuery(sql,new String[]{String.valueOf(userId)});
+            while (cursor.moveToNext())
+            {
+                rent = new Rent();
+                setRentFromCursor(rent,cursor,0);
+                rentList.add(rent);
+            }
+            return rentList;
+        }
+        catch (Exception e)
+        {
+            Log.e("ERROR CATCH", "loginCheck: " + e.getMessage() );
+        }
+        return rentList;
     }
 }

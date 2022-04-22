@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/Theme.NoActionBar.RentCafe"
     android:orientation="vertical" >
 
     <ImageView
-        android:id="@+id/ic_back_registrationActivity"
+        android:id="@+id/back_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="26dp"
-        android:onClick="loginBtnClicked"
         android:src="@drawable/keyboard_backspace_black" />
 
     <LinearLayout
@@ -29,160 +29,161 @@
             android:text="@string/register_title"
             android:textAlignment="center"
             android:textColor="@color/gray14"
-            android:textSize="32sp" />
+            android:textSize="30sp" />
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent" >
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginStart="30dp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="@string/firstName"
-                    android:textSize="16sp" />
 
-                <EditText
-                    android:id="@+id/rentname_edittext"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="30dp"
-                    android:background="@drawable/edit_text_border"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="Paul"
-                    android:paddingTop="10dp"
-                    android:paddingRight="15dp"
-                    android:paddingBottom="10dp"
-                    android:paddingLeft="10dp"
-                    android:textSize="14sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="30dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/firstName"
+                android:textSize="16sp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginStart="30dp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="@string/lastName"
-                    android:textSize="16sp" />
+            <EditText
+                android:id="@+id/fname_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/edit_text_border"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="Paul"
+                android:paddingTop="10dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:textSize="14sp" />
 
-                <EditText
-                    android:id="@+id/lname_edittext"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="30dp"
-                    android:background="@drawable/edit_text_border"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="Max"
-                    android:paddingTop="10dp"
-                    android:paddingRight="15dp"
-                    android:paddingBottom="10dp"
-                    android:paddingLeft="10dp"
-                    android:textSize="14sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="30dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/lastName"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/lname_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/edit_text_border"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="Max"
+                android:paddingTop="10dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:textSize="14sp" />
 
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginStart="30dp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="@string/email"
-                    android:textSize="16sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="30dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/email"
+                android:textSize="16sp" />
 
-                <EditText
-                    android:id="@+id/city_edittext"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="30dp"
-                    android:background="@drawable/edit_text_border"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="someone@email.com"
-                    android:inputType="textEmailAddress"
-                    android:paddingTop="10dp"
-                    android:paddingRight="15dp"
-                    android:paddingBottom="10dp"
-                    android:paddingLeft="10dp"
-                    android:textSize="14sp" />
+            <EditText
+                android:id="@+id/email_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/edit_text_border"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="someone@email.com"
+                android:inputType="textEmailAddress"
+                android:paddingTop="10dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:textSize="14sp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginStart="30dp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="@string/password"
-                    android:textSize="16sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="30dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/password"
+                android:textSize="16sp" />
 
-                <EditText
-                    android:id="@+id/state_edittext"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="30dp"
-                    android:background="@drawable/edit_text_border"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="* * * *"
-                    android:inputType="textPassword"
-                    android:paddingTop="10dp"
-                    android:paddingRight="15dp"
-                    android:paddingBottom="10dp"
-                    android:paddingLeft="10dp"
-                    android:textSize="14sp" />
+            <EditText
+                android:id="@+id/password_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/edit_text_border"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="* * * *"
+                android:inputType="textPassword"
+                android:paddingTop="10dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:textSize="14sp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginStart="30dp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="@string/contact"
-                    android:textSize="16sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="30dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/contact"
+                android:textSize="16sp" />
 
-                <EditText
-                    android:id="@+id/price_edittext"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="30dp"
-                    android:background="@drawable/edit_text_border"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="2268559657"
-                    android:inputType="number"
-                    android:paddingTop="10dp"
-                    android:paddingRight="15dp"
-                    android:paddingBottom="10dp"
-                    android:paddingLeft="10dp"
-                    android:textSize="14sp" />
+            <EditText
+                android:id="@+id/contact_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/edit_text_border"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="2268559657"
+                android:inputType="number"
+                android:paddingTop="10dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:textSize="14sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/register_btn"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/btn_capsule_gray14"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/registration_btn"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
             </LinearLayout>
-
         </ScrollView>
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/register_btn"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/btn_capsule_gray14"
-            android:fontFamily="@font/poppins_bold"
-            android:onClick="registerBtnClicked"
-            android:text="@string/registration_btn"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
 
     </LinearLayout>
 </LinearLayout>

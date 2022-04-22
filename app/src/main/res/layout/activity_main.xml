@@ -5,11 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/Theme.NoActionBar.RentCafe"
     android:orientation="vertical" >
 
     <ImageView
-        android:id="@+id/ic_back_registrationActivity"
         android:layout_width="170dp"
         android:layout_height="170dp"
         android:layout_marginLeft="110dp"
@@ -20,7 +18,7 @@
         android:id="@+id/txt_property"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         android:layout_marginStart="30dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="@string/login_title"
@@ -35,10 +33,11 @@
         android:layout_marginStart="30dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="@string/email"
+        android:inputType="textEmailAddress"
         android:textSize="16sp" />
 
     <EditText
-        android:id="@+id/city_edittext"
+        android:id="@+id/email_edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
@@ -64,7 +63,7 @@
         android:textSize="16sp" />
 
     <EditText
-        android:id="@+id/state_edittext"
+        android:id="@+id/password_edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
@@ -84,12 +83,12 @@
         android:id="@+id/login_btn"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:layout_marginStart="25dp"
         android:layout_marginTop="35dp"
+        android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
+        android:onClick="loginBtnClicked"
         android:background="@drawable/btn_capsule_gray14"
         android:fontFamily="@font/poppins_bold"
-        android:onClick="loginBtnClicked"
         android:text="@string/login_btn"
         android:textColor="@color/white"
         android:textSize="16sp" />
@@ -98,13 +97,13 @@
         android:id="@+id/register_btn"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:layout_marginStart="25dp"
         android:layout_marginTop="15dp"
+        android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="10dp"
+        android:onClick="registerBtnClicked"
         android:background="@drawable/btn_capsule_gray14"
         android:fontFamily="@font/poppins_bold"
-        android:onClick="registerBtnClicked"
         android:text="@string/registration_btn"
         android:textColor="@color/white"
         android:textSize="16sp" />

@@ -13,6 +13,7 @@
 
     <string name="add_property_title">List Your Property</string>
     <string name="property_name">Property Name</string>
+    <string name="address">Address</string>
     <string name="property_type">Property Type</string>
     <string name="property_type_prompt">Choose</string>
     <string name="city">City</string>
@@ -36,6 +37,9 @@
     <string name="image_selection">Select an image</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="rent_btn">Rent</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 </resources>
